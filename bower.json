@@ -1,0 +1,25 @@
+{
+  "name": "angular-odm",
+  "description": "AngularJS Object Database Model",
+  "main": "index.js",
+  "authors": [
+    "Nils Gajsek <nils.gajsek@linslin.org>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Model",
+    "ORM",
+    "MVC"
+  ],
+  "homepage": "https://github.com/linslin/angular-odm",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
