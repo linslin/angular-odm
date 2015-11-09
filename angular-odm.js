@@ -38,7 +38,7 @@
          * @description
          * Provides read/write access to browser's cookies.
          */
-        this.$get = ['$q', 'lodash', function ($q, lodash) {
+        this.$get = ['lodash', function (lodash) {
 
             odm.db = function () {
 
@@ -204,8 +204,7 @@
                         var data = {};
 
                         //start async progress
-                        var deferred = $q.defer();
-                        var promises = angular.forEach(self._attributes, function (attribute) {
+                        angular.forEach(self._attributes, function (attribute) {
 
                             switch (attribute.type) {
 
@@ -226,22 +225,15 @@
                             }
                         });
 
+                        //query db
+                        if (insertId = odm.db().localStorageDBProvider.insert(self._table, data)) {
 
-                        $q.all(promises).then(function () {
+                            //setup current record ID
+                            self.ID = insertId;
 
-                            //query db
-                            if (insertId = odm.db().localStorageDBProvider.insert(self._table, data)) {
-
-                                //commit changes to db
-                                odm.db().localStorageDBProvider.commit();
-
-                                //setup current record ID
-                                self.ID = insertId;
-                                deferred.resolve(true);
-                            }
-                        });
-
-                        return deferred.promise;
+                            //commit changes to db
+                            return odm.db().localStorageDBProvider.commit();
+                        }
 
                     } else {
                         return false;
@@ -324,20 +316,8 @@
 
                     var self = this;
 
-                    //start async progress
-                    var deferred = $q.defer();
-                    var promises = $q(function () {
-
-                        //set data
-                        self.data = odm.db().localStorageDBProvider.queryAll(self._table, {});
-                    });
-
-
-                    $q.all(promises).then(function () {
-                        deferred.resolve(true);
-                    });
-
-                    return deferred.promise;
+                    //set data
+                    return self.data = odm.db().localStorageDBProvider.queryAll(self._table, {});
                 };
 
 
@@ -357,13 +337,9 @@
                     // unset currrent data
                     self.data = [];
                     this.data = [];
-
                     var data = {};
 
-
-                    //start async progress
-                    var deferred = $q.defer();
-                    var promises = angular.forEach(this._attributes, function (attribute) {
+                    angular.forEach(this._attributes, function (attribute) {
 
                         //check if attribute is in scope and overstep if not.
                         //empty scope = every attribute will be updated
@@ -386,15 +362,7 @@
                         }
                     });
 
-
-                    $q.all(promises).then(function () {
-
-                        //query db
-                        self.data = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data});
-                        deferred.resolve(true);
-                    });
-
-                    return deferred.promise;
+                    return self.data = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data});
                 };
 
 
@@ -409,8 +377,7 @@
                     var self = this;
 
                     //start async progress
-                    var deferred = $q.defer();
-                    var promises = angular.forEach(this._attributes, function (attribute) {
+                    angular.forEach(this._attributes, function (attribute) {
 
                         //check if attribute is in scope and overstep if not.
                         //empty scope = every attribute will be updated
@@ -433,22 +400,16 @@
                         }
                     });
 
+                    //query db
+                    var result = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data, limit: 1});
 
-                    $q.all(promises).then(function () {
+                    if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
+                        angular.forEach(result[0], function (value, key) {
+                            self[key] = value;
+                        });
+                    }
 
-                        //query db
-                        var result = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data, limit: 1});
-
-                        if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
-                            angular.forEach(result[0], function (value, key) {
-                                self[key] = value;
-                            });
-                        }
-
-                        deferred.resolve(true);
-                    });
-
-                    return deferred.promise;
+                    return result[0];
                 };
 
 
@@ -510,8 +471,7 @@
                     var self = this;
 
                     //start async progress
-                    var deferred = $q.defer();
-                    var promises = angular.forEach(this._attributes, function (attribute) {
+                    angular.forEach(this._attributes, function (attribute) {
 
                         //check if attribute is in scope and overstep if not.
                         //empty scope = every attribute will be updated
@@ -534,18 +494,9 @@
                         }
                     });
 
-
-                    $q.all(promises).then(function () {
-
-
-                        //delete rows
-                        odm.db().localStorageDBProvider.deleteRows(self._table, data);
-                        odm.db().localStorageDBProvider.commit();
-
-                        deferred.resolve(true);
-                    });
-
-                    return deferred.promise;
+                    //delete rows
+                    odm.db().localStorageDBProvider.deleteRows(self._table, data);
+                    return odm.db().localStorageDBProvider.commit();
                 };
 
 
