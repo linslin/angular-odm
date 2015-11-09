@@ -414,6 +414,53 @@
 
 
                 /**
+                 * Count by attributes. Return integer count of detected rows.
+                 *
+                 * @param {array} attributes
+                 *
+                 * @return {int}
+                 */
+                serviceProvider.prototype.countByAttributes = function (attributes) {
+
+                    var data = {};
+                    var self = this;
+
+                    //start async progress
+                    angular.forEach(this._attributes, function (attribute) {
+
+                        //check if attribute is in scope and overstep if not.
+                        //empty scope = every attribute will be updated
+                        if (Object.keys(attributes).length > 0 && angular.isUndefined(attributes[attribute.name])) {
+                            return; //means continue in third party loops
+                        }
+
+                        switch (attribute.type) {
+
+                            case 'pk': // do nothing with PK
+                                break;
+
+                            case 'integer':
+                                data[attribute.name] = attributes[attribute.name];
+                                break;
+
+                            case 'text':
+                                data[attribute.name] = String(attributes[attribute.name]);
+                                break;
+                        }
+                    });
+
+                    //query db
+                    var result = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data, limit: 1});
+
+                    if (result[0] !== undefined) {
+                        return result[0].length;
+                    } else {
+                        return 0;
+                    }
+                };
+
+
+                /**
                  * Find entry by primary key
                  *
                  * @param {integer} pk
