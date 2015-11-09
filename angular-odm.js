@@ -58,7 +58,7 @@
                         console.error('#angular-odm ! ODM.dbSchema.name not defined. Failed to initialize localeStorageDb');
                         return false;
                     } else {
-                        self.localStorageDB = new localStorageDB(ODM.dbSchema.name, localStorage);
+                        self.localStorageDBProvider = new localStorageDB(ODM.dbSchema.name, localStorage);
                     }
 
                     //move through all configured tables
@@ -73,16 +73,16 @@
                         });
 
                         //check drop statement
-                        if (table.resetOnInit && self.localStorageDB.tableExists(table.name)) {
-                            self.localStorageDB.dropTable(table.name);
+                        if (table.resetOnInit && self.localStorageDBProvider.tableExists(table.name)) {
+                            self.localStorageDBProvider.dropTable(table.name);
                             //console.info('Table "' + table.name + '" reset done');
                         }
 
                         //create tables query
-                        if ((self.localStorageDB.tableExists(table.name))) {
+                        if ((self.localStorageDBProvider.tableExists(table.name))) {
                             //console.warn('Table "' + table.name + ' already exists. Skipping create table.');
                         } else {
-                            if (self.localStorageDB.createTable(table.name, columns)) {
+                            if (self.localStorageDBProvider.createTable(table.name, columns)) {
                                 //console.info('Table "' + table.name + '" initialized');
                             } else {
                                 console.info('#angular-odm ! Cannot create Table "' + table.name);
@@ -91,7 +91,7 @@
                     });
 
                     //commit database to localStorage
-                    self.localStorageDB.commit();
+                    self.localStorageDBProvider.commit();
                 };
 
 
@@ -230,10 +230,10 @@
                         $q.all(promises).then(function () {
 
                             //query db
-                            if (insertId = odm.db().localStorageDB.insert(self._table, data)) {
+                            if (insertId = odm.db().localStorageDBProvider.insert(self._table, data)) {
 
                                 //commit changes to db
-                                odm.db().localStorageDB.commit();
+                                odm.db().localStorageDBProvider.commit();
 
                                 //setup current record ID
                                 self.ID = insertId;
@@ -292,7 +292,7 @@
 
 
                         //update row with current self.ID
-                        odm.db().localStorageDB.update(self._table, {ID: self.ID}, function (row) {
+                        odm.db().localStorageDBProvider.update(self._table, {ID: self.ID}, function (row) {
 
                             //build query
                             angular.forEach(data, function (value, key) {
@@ -307,7 +307,7 @@
                         });
 
                         //commit changes to db
-                        return odm.db().localStorageDB.commit();
+                        return odm.db().localStorageDBProvider.commit();
 
                     } else {
                         return false;
@@ -329,7 +329,7 @@
                     var promises = $q(function () {
 
                         //set data
-                        self.data = odm.db().localStorageDB.queryAll(self._table, {});
+                        self.data = odm.db().localStorageDBProvider.queryAll(self._table, {});
                     });
 
 
@@ -390,7 +390,7 @@
                     $q.all(promises).then(function () {
 
                         //query db
-                        self.data = odm.db().localStorageDB.queryAll(self._table, {"query": data});
+                        self.data = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data});
                         deferred.resolve(true);
                     });
 
@@ -437,7 +437,7 @@
                     $q.all(promises).then(function () {
 
                         //query db
-                        var result = odm.db().localStorageDB.queryAll(self._table, {"query": data, limit: 1});
+                        var result = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data, limit: 1});
 
                         if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
                             angular.forEach(result[0], function (value, key) {
@@ -464,7 +464,7 @@
                     //check if pk is a number
                     if (angular.isNumber(pk)) {
 
-                        var result = odm.db().localStorageDB.query(this._table, {"ID": pk});
+                        var result = odm.db().localStorageDBProvider.query(this._table, {"ID": pk});
 
                         if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
                             return result[0];
@@ -489,10 +489,10 @@
                     if (angular.isNumber(pk)) {
 
                         //delete rows
-                        odm.db().localStorageDB.deleteRows(this._table, {"ID": pk});
+                        odm.db().localStorageDBProvider.deleteRows(this._table, {"ID": pk});
 
                         //commit changes to db
-                        return odm.db().localStorageDB.commit();
+                        return odm.db().localStorageDBProvider.commit();
                     }
 
                     return false;
@@ -539,8 +539,8 @@
 
 
                         //delete rows
-                        odm.db().localStorageDB.deleteRows(self._table, data);
-                        odm.db().localStorageDB.commit();
+                        odm.db().localStorageDBProvider.deleteRows(self._table, data);
+                        odm.db().localStorageDBProvider.commit();
 
                         deferred.resolve(true);
                     });
@@ -555,12 +555,12 @@
                 serviceProvider.prototype.deleteAll = function () {
 
                     //Truncate table
-                    if (odm.db().localStorageDB.tableExists(this._table)) {
-                        odm.db().localStorageDB.truncate(this._table);
+                    if (odm.db().localStorageDBProvider.tableExists(this._table)) {
+                        odm.db().localStorageDBProvider.truncate(this._table);
                     }
 
                     //commit changes to db
-                    return odm.db().localStorageDB.commit();
+                    return odm.db().localStorageDBProvider.commit();
                 };
 
 
@@ -575,7 +575,7 @@
                     this.errors = [];
                     var self = this; // set global function instance
 
-                    if (odm.db().localStorageDB.tableExists(self._table)) {
+                    if (odm.db().localStorageDBProvider.tableExists(self._table)) {
 
                         //validate every attribute by type
                         angular.forEach(self._attributes, function (attribute) {
