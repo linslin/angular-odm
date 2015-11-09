@@ -575,9 +575,6 @@
                     this.errors = [];
                     var self = this; // set global function instance
 
-
-                    console.log(odm.db().localStorageDB);
-
                     if (odm.db().localStorageDB.tableExists(self._table)) {
 
                         //validate every attribute by type
