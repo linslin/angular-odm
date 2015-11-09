@@ -593,7 +593,7 @@
                                         break;
                                 }
                             } else {
-                                self.errors[attribute.name] = 'Attribute' + attribute.name + ' is undefined. Cannot validate it.';
+                                self.errors[attribute.name] = 'Attribute ' + attribute.name + ' is undefined. Cannot validate it.';
                             }
                         })
                     } else {
