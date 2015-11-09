@@ -450,13 +450,7 @@
                     });
 
                     //query db
-                    var result = odm.db().localStorageDBProvider.queryAll(self._table, {"query": data, limit: 1});
-
-                    if (result[0] !== undefined) {
-                        return result[0].length;
-                    } else {
-                        return 0;
-                    }
+                    return odm.db().localStorageDBProvider.queryAll(self._table, {"query": data}).length;
                 };
 
 
@@ -477,11 +471,9 @@
                         if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
                             return result[0];
                         }
-
-                        return false;
                     }
 
-                    return false;
+                    return {};
                 };
 
 
