@@ -1,5 +1,5 @@
 # angular-odm 
-AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage used as persistence.
+AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage used as persistence. Angular-odm provides a bit logic of active record model handling known from popular MVC Frameworks. 
 
 ## Installation
 
