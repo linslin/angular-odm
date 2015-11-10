@@ -322,6 +322,20 @@
 
 
                 /**
+                 * Returns total count of rows in database.
+                 *
+                 * @return {number}
+                 */
+                serviceProvider.prototype.countAll = function () {
+
+                    var self = this;
+
+                    //set data
+                    return odm.db().localStorageDBProvider.queryAll(self._table, {}).length;
+                };
+
+
+                /**
                  * Find all rows by attributes. Return single row which was find by attributes
                  *
                  * @param {array} attributes
