@@ -1,7 +1,86 @@
 # angular-odm 
 AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage mapping as persistence.
 
-##### Handle your model abstract:
+## Installation
+
+`bower install angular-odm`
+
+
+#### Quick controller examples
+
+#### Load user data 
+
+```javascript
+/**
+ * Load user on scope, init scope data.
+ */
+$scope.users = userModel.findAll();
+```
+
+#### Add a single record
+
+```javascript
+/**
+ * Add a user (no validation, simple)
+ *
+ * @param {object} user
+ */
+$scope.addUser = function (user) {
+
+    //Setup user model
+    userModel.ID = null;
+    userModel.firstname = user.firstname;
+    userModel.surname = user.surname;
+    userModel.email = user.email;
+
+    //Save to local storage db
+    if(userModel.save()) {
+        // success handling here
+    } else {
+        //error handling here
+    }
+};
+```
+
+#### Delete a single record
+
+```javascript
+/**
+ * Delete a user by primary key
+ *
+ * @param {number} userId
+ */
+$scope.deleteUser = function (userId) {
+
+    //Delete user by primary key
+    if(userModel.deleteByPk(userId)) {
+        // success handling here
+    } else {
+        //error handling here
+    }
+};
+```
+
+
+#### Delete a all records
+
+```javascript
+/**
+ * Delete all users
+ */
+$scope.cleanupUsers = function () {
+
+    //Delete user by primary key
+    if(userModel.deleteAll()) {
+        // success handling here
+    } else {
+        //error handling here
+    }
+};
+```
+
+
+## Handle your model abstract:
 
 - model.save();
 - model.update();
@@ -19,10 +98,6 @@ AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with 
 ## Demo
 Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
 Demo sourcecodes can be found here https://github.com/linslin/ng-odm-angularjs-demo.
-
-## Installation
-
-`bower install angular-odm`
 
 ## Configuration
 
@@ -486,7 +561,6 @@ Will delete all records of a model.
 
 #### model.validate();
 
-#### model.deleteAll();
 Call validate manually. Will validate model attribute values by model definition. 
 Is automatically called before a database transaction. 
                       
