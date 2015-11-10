@@ -1,6 +1,21 @@
 # angular-odm 
 AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage mapping as persistence.
 
+##### Handle your model abstract:
+
+- model.save();
+- model.update();
+- model.findAll();
+- model.findByPk();
+- model.findByAttributes();
+- model.findAllByAttributes();
+- model.countAll();
+- model.countByAttributes();
+- model.deleteByPk();
+- model.deleteByAttributes();
+- model.deleteAll();
+- model.validate();
+
 ## Demo
 Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
 Demo sourcecodes can be found here https://github.com/linslin/ng-odm-angularjs-demo.
@@ -268,7 +283,7 @@ function exampleModel($odm) {
 #### model.ID
 Holds ID (pk) of model. 
 
-> {mixed} null|number
+> {null|number} 
 
 ```javascript 
     // search for first user in db with name 'bob'
@@ -287,7 +302,7 @@ Holds ID (pk) of model.
 #### model.save();
 Will save a model values into local storage. 
 
-> {Boolean} true|false
+> {Boolean}
 
 ```javascript 
     // search for first user in db with name 'bob'
@@ -307,10 +322,9 @@ Will save a model values into local storage.
 #### model.update();
 Will update a single model record depending on attribute values. 
 
-> {Boolean} true|false
+> {Boolean}
 
 ```javascript 
-
     // search for first user in db with name 'bob'
     userModel.ID = null; // reset ID before save, could be set by previous transactions.
     userModel.findByAttributes({name: 'bob'});
@@ -332,16 +346,166 @@ Will update a single model record depending on attribute values.
 
 
 #### model.findAll();
+Will return array of all rows in database. 
+
+> {Array} 
+
+```javascript 
+    // search for first user in db with name 'bob'
+    var users = userModel.findAll();
+    
+    if (users.length > 0) {
+        angular.forEach(users, function (user, key) {
+           console.log(user.name);
+        });
+    }
+```
+
+
 #### model.findByPk();
+Will search a single model record depending on primary key. 
+
+> {Object}
+
+```javascript 
+    // search for first user in db with name 'bob'
+    var userData = userModel.findByPk(3);
+    
+    if (userData.length > 0) {
+       console.log(userData.name);
+       // Bob
+    }
+```
+
 #### model.findByAttributes();
-#### model.findByAttributes();
+Will search a single model record depending on search attributes. 
+
+> {Object}
+
+```javascript 
+    // search for first user in db with name 'bob'
+    var userData = userModel.findByAttributes({name: 'BoB', email: 'bob@cynclairoito.com'});
+    
+    if (userData.length > 0) {
+       console.log(userData.name);
+       // Bob
+    }
+```
+
+
 #### model.findAllByAttributes();
+Will search a multiple rows depending on search attributes. 
+
+> {Array}
+
+```javascript 
+    // search for users with name 'Frank'.
+    var searchUser = userModel.findAllByAttributes({name: 'Frank'});
+    
+    if (searchUser.length > 0) {
+        angular.forEach(searchUser, function (user, key) {
+           console.log(user.name);
+        });
+    }
+```
+
 #### model.countAll();
+Will count all record of a model in database. 
+                      
+> {Number}
+
+```javascript 
+    // count all users
+    var count = userModel.countAll();
+    
+    console.log(count);
+    // 15
+```
+
 #### model.countByAttributes();
+Will count all record of a model in database filtered by attributes. 
+                      
+> {Number}
+
+```javascript 
+    // count all users
+    var franks = userModel.countByAttributes({name: 'Frank'});
+    
+    console.log(franks + ' Franks in database.');
+    // 15 Franks in database.
+```
+
 #### model.deleteByPk();
+Will delete a record by primary key.
+                      
+> {Boolean}
+
+```javascript 
+    // try delete user with ID = 3;
+    if (userModel.deleteByPk(3)) {
+         // all your success godness here ...
+    } else {
+        //log errors
+        console.log(userModel.errors);
+    }
+```
+
 #### model.deleteByAttributes();
+Will delete all records with matching attribute values.
+                      
+> {Boolean}
+
+```javascript 
+    // try delete all 'Frank' users. Byby Frank's. 
+    if (userModel.deleteByAttributes({name: 'Frank'})) {
+         // all your success godness here ...
+    } else {
+        //log errors
+        console.log(userModel.errors);
+    }
+```
+
+
 #### model.deleteAll();
+Will delete all records of a model. 
+                      
+> {Boolean}
+
+```javascript 
+    // try delete all users
+    if (userModel.deleteAll()) {
+         // all your success godness here ...
+        console.log(userModel.countAll());
+        // 0
+    } else {
+        //log errors
+        console.log(userModel.errors);
+    }
+```
+
+
 #### model.validate();
+
+#### model.deleteAll();
+Call validate manually. Will validate model attribute values by model definition. 
+Is automatically called before a database transaction. 
+                      
+> {Boolean}
+
+```javascript 
+
+    //setup invalide user with integer name
+    userModel.ID = null
+    userModel.name = 123;
+    
+    //try validate 
+    if (userModel.validate()) { 
+         // all your success godness here ...
+    } else {
+        //log errors
+        console.log(userModel.errors);
+    }
+```
 
 ## Changelog
 
