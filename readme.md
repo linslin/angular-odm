@@ -1,5 +1,5 @@
 # angular-odm 
-AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage mapping as persistence.
+AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with locale storage "database" support. Pure model handling with local storage used as persistence.
 
 ## Installation
 
@@ -7,7 +7,7 @@ AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with 
 
 
 ## Demo
-Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
+Check out this demo application here http://www.linslin.org/angular-odm-demo/. 
 Demo sourcecodes can be found here https://github.com/linslin/ng-odm-angularjs-demo.
 
 
@@ -67,7 +67,7 @@ $scope.deleteUser = function (userId) {
 ```
 
 
-#### Delete a all records
+#### Delete all records
 
 ```javascript
 /**
@@ -131,7 +131,7 @@ Note that you need to configure your database and models to make angular-odm wor
 ```
 
 #### Create ODM configuration 
-> The configuration module needs to be named `ODMConfiguration` with a constant defined as `ODM`. For example in a `app/config` directory. Naming is strict. All Database configurations will be placed here. Here is a example database setup with three table in it. 
+> The configuration module needs to be named `ODMConfiguration` with a constant defined as `ODM`. For example in a `app/config` directory. Naming is strict. All Database configurations will be placed here. Here is a example database setup with three tables in it. 
 > Database schema will automatically created on AngularJS application startup.  
 
 ```javascript
@@ -153,7 +153,7 @@ Note that you need to configure your database and models to make angular-odm wor
     // ################################################ AngularJS Module define // #####################################
 
     /**
-     * ODM constant. Application default main configuration.
+     * ODM constant, ODM default main configuration.
      *
      * @name ODMConfiguration
      */
@@ -193,7 +193,7 @@ Note that you need to configure your database and models to make angular-odm wor
 ```
 
 #### Create your models. 
-> You will need to define your model and its attributes which will associate with localStorageDB. You could do that in a `app/model` directory for example. Define your model attributes by using `self._attributes`. Hint that `self._attributes` object needs to be defined database configuration as well, else the model will not be persisted in locale storage. 
+> You will need to define your model and its attributes which will associate with localStorageDB. You could do that in a `app/model` directory. Define your model attributes by using `self._attributes`. Hint that `self._attributes` object needs to be defined database configuration as well, else the model will not be persisted in locale storage. 
 > Change `self._table` to connect a model to a datebase table which should be defined in `ODM` configuration constant. 
 
 ```javascript
@@ -254,7 +254,7 @@ Note that you need to configure your database and models to make angular-odm wor
 ```
 
 #### Include application module dependencies
-Add those modules into your application main module like. Don't forget to load your resources into dom. =)
+Add those modules into your application main module like in the following example. Don't forget to load your resources into dom. =)
 
 ```javascript
 angular
@@ -314,7 +314,7 @@ angular.module('ODMConfiguration', []).constant('ODM', {
 ```
 
 ## Model configuration 
-You will need to define your model and its attributes which will associate with localStorageDB. You could do that in a `app/model` directory for example. Define your model attributes by using `self._attributes`. Hint that `self._attributes` object needs to be defined database configuration as well, else the model will not be persisted in locale storage. Change `self._table` to connect a model to a datebase table which should be defined in `ODM` configuration constant. 
+You will need to define your model and its attributes which will associate with localStorageDB. You could do that in a `app/model` directory. Define your model attributes by using `self._attributes`. Hint that `self._attributes` object needs to be defined database configuration as well, else the model will not be persisted in locale storage. Change `self._table` to connect a model to a datebase table which should be defined in `ODM` configuration constant. 
 
 ```javascript 
  /**
@@ -380,7 +380,7 @@ Holds ID (pk) of model.
 
 
 #### model.save();
-Will save a model values into local storage. 
+Function will save a model values into local storage. 
 
 > {Boolean}
 
@@ -400,7 +400,7 @@ Will save a model values into local storage.
 ```
 
 #### model.update();
-Will update a single model record depending on attribute values. 
+Function will update a single model record depending on attribute values. 
 
 > {Boolean}
 
@@ -426,7 +426,7 @@ Will update a single model record depending on attribute values.
 
 
 #### model.findAll();
-Will return array of all rows in database. 
+Function will return array of all rows in database. 
 
 > {Array} 
 
@@ -443,7 +443,7 @@ Will return array of all rows in database.
 
 
 #### model.findByPk();
-Will search a single model record depending on primary key. 
+Function will search a single model record depending on primary key. 
 
 > {Object}
 
@@ -458,7 +458,7 @@ Will search a single model record depending on primary key.
 ```
 
 #### model.findByAttributes();
-Will search a single model record depending on search attributes. 
+Function will search a single model record depending on search attributes. 
 
 > {Object}
 
@@ -474,7 +474,7 @@ Will search a single model record depending on search attributes.
 
 
 #### model.findAllByAttributes();
-Will search a multiple rows depending on search attributes. 
+Function will search multiple rows depending on search attributes. 
 
 > {Array}
 
@@ -490,7 +490,7 @@ Will search a multiple rows depending on search attributes.
 ```
 
 #### model.countAll();
-Will count all record of a model in database. 
+Function will count all records of a model in database. 
                       
 > {Number}
 
@@ -503,7 +503,7 @@ Will count all record of a model in database.
 ```
 
 #### model.countByAttributes();
-Will count all record of a model in database filtered by attributes. 
+Function will count all record of a model in database filtered by attributes. 
                       
 > {Number}
 
@@ -516,7 +516,7 @@ Will count all record of a model in database filtered by attributes.
 ```
 
 #### model.deleteByPk();
-Will delete a record by primary key.
+Function will delete a record by primary key.
                       
 > {Boolean}
 
@@ -531,7 +531,7 @@ Will delete a record by primary key.
 ```
 
 #### model.deleteByAttributes();
-Will delete all records with matching attribute values.
+Function will delete all records with matching attribute values.
                       
 > {Boolean}
 
@@ -547,7 +547,7 @@ Will delete all records with matching attribute values.
 
 
 #### model.deleteAll();
-Will delete all records of a model. 
+Function will delete all records of a model. 
                       
 > {Boolean}
 
@@ -566,7 +566,7 @@ Will delete all records of a model.
 
 #### model.validate();
 
-Call validate manually. Will validate model attribute values by model definition. 
+You can call validate manually. It will validate model attribute values depending on model attribute definition. 
 Is automatically called before a database transaction. 
                       
 > {Boolean}
