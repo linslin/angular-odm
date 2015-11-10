@@ -1,27 +1,8 @@
 {
   "name": "angular-odm",
-  "description": "AngularJS Object Database Model",
-  "main": "angular-odm.js",
-  "authors": [
-    "Nils Gajsek <nils.gajsek@linslin.org>"
-  ],
-  "license": "MIT",
-  "keywords": [
-    "Model",
-    "ORM",
-    "MVC"
-  ],
-  "homepage": "https://github.com/linslin/angular-odm",
-  "moduleType": [
-    "globals"
-  ],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "version": "0.0.1",
+  "main": "./angular-odm.js",
+  "ignore": [],
   "dependencies": {
     "localstoragedb": "2.3.1"
   }
