@@ -6,7 +6,12 @@ AngularJS **O**bject **D**atabase **M**odel brings abstract model handling with 
 `bower install angular-odm`
 
 
-#### Quick controller examples
+## Demo
+Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
+Demo sourcecodes can be found here https://github.com/linslin/ng-odm-angularjs-demo.
+
+
+## Quick controller examples
 
 #### Load user data 
 
@@ -94,10 +99,6 @@ $scope.cleanupUsers = function () {
 - model.deleteByAttributes();
 - model.deleteAll();
 - model.validate();
-
-## Demo
-Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
-Demo sourcecodes can be found here https://github.com/linslin/ng-odm-angularjs-demo.
 
 ## Configuration
 
