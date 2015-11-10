@@ -38,8 +38,14 @@
          * @description
          * Provides read/write access to browser's cookies.
          */
-        this.$get = ['lodash', function (lodash) {
+        this.$get = [function () {
 
+            /**
+             * Database object
+             *
+             * @name odm.db
+             * @returns {odm.db}
+             */
             odm.db = function () {
 
                 // ############################################# Functions // ##########################################

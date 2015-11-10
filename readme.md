@@ -1,7 +1,12 @@
 # angular-odm 
 AngularJS Object Database Model brings abstract model handling with locale storage "database" support. 
 
-## Installtion
+## Demo
+Check out the a demo application here http://www.linslin.org/angular-odm-demo/. 
+Sourcecodes of demo can be found here https://github.com/linslin/ng-odm-angularjs-demo.
+
+
+## Installation
 
 Run `bower install angular-odm`
 
@@ -11,7 +16,6 @@ Run `bower install angular-odm`
 
 ```html
 <script src="/path/to/angular-odm.js"></script>
-<script src="/path/to/ng-lodash.js"></script>
 <script src="/path/to/localStorageDb.js"></script>
 ```
 
@@ -99,3 +103,8 @@ Run `bower install angular-odm`
 #### model.deleteByAttributes();
 #### model.deleteAll();
 #### model.validate();
+
+## Changelog
+
+#### Version 0.0.1 
+- First stable release 

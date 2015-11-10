@@ -23,7 +23,6 @@
     "tests"
   ],
   "dependencies": {
-    "localstoragedb": "2.3.1",
-    "ng-lodash": "0.3.0"
+    "localstoragedb": "2.3.1"
   }
 }
