@@ -1,7 +1,7 @@
 {
   "name": "angular-odm",
   "description": "AngularJS Object Database Model",
-  "main": "index.js",
+  "main": "angular-odm.js",
   "authors": [
     "Nils Gajsek <nils.gajsek@linslin.org>"
   ],
