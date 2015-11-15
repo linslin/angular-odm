@@ -630,6 +630,8 @@
                     return result;
                 };
 
+                //auto init database on load
+                this.db().init();
 
                 //return model -> non-singleton model instance object
                 return model;

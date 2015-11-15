@@ -588,5 +588,8 @@ Is automatically called before a database transaction.
 
 ## Changelog
 
+#### Version 0.0.2
+- Fixed missing auto init `odm.db.init()` call on module load. 
+
 #### Version 0.0.1 
 - First stable release 
