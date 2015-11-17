@@ -3,7 +3,7 @@
   "description": "AngularJS Object Database Model",
   "homepage": "https://github.com/linslin/angular-odm",
   "main": "angular-odm.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "authors": [
     "Nils Gajsek <nils.gajsek@linslin.org>"
   ],

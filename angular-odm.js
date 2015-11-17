@@ -483,12 +483,20 @@
                  */
                 serviceProvider.prototype.findByPk = function (pk) {
 
+                    var self = this;
+
                     //check if pk is a number
                     if (angular.isNumber(pk)) {
 
                         var result = odm.db().localStorageDBProvider.query(this._table, {"ID": pk});
 
                         if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
+                            if (result.length > 0 && !angular.isUndefined(result[0].ID)) {
+                                angular.forEach(result[0], function (value, key) {
+                                    self[key] = value;
+                                });
+                            }
+
                             return result[0];
                         }
                     }

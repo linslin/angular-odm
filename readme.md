@@ -588,6 +588,9 @@ Is automatically called before a database transaction.
 
 ## Changelog
 
+#### Version 0.0.3
+- Fixed `model.update()` -> added missing setup `self._attributes`. 
+
 #### Version 0.0.2
 - Fixed missing auto init `odm.db.init()` call on module load. 
 
