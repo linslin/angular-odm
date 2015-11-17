@@ -304,9 +304,18 @@
                             return row;
                         });
 
-                        //commit changes to db
-                        return odm.db().localStorageDBProvider.commit();
 
+                        //commit changes to db and check result + update model attributes
+                        if (odm.db().localStorageDBProvider.commit()) {
+                            if (angular.isObject(attributes)) {
+                                angular.forEach(attributes, function (value, key) {
+                                    self[key] = value;
+                                });
+                            }
+                            return true;
+                        } else {
+                            return false;
+                        }
                     } else {
                         return false;
                     }

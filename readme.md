@@ -590,6 +590,9 @@ Is automatically called before a database transaction.
 
 ## Changelog
 
+#### Version 0.0.5
+- Final fix: `model.update()` -> added missing setup `self._attributes`. 
+
 #### Version 0.0.4
 - Added param validate on `model.update()`.
 - Updated `readme.md` at part `model.update()`.
