@@ -412,10 +412,12 @@ Function will update a single model record depending on attribute values.
     if (userModel.ID !== null) {
        
         //update name attribute
-        userModel.name = 'New Name';
+        updateColumns = {
+           name: 'New Name'
+        }
         
         // try update model
-        if (userModel.update()) {
+        if (userModel.update(updateColumns)) {
              // all your success godness here ...
         } else {
             //log errors
@@ -587,6 +589,10 @@ Is automatically called before a database transaction.
 ```
 
 ## Changelog
+
+#### Version 0.0.4
+- Added param validate on `model.update()`.
+- Updated `readme.md` at part `model.update()`.
 
 #### Version 0.0.3
 - Fixed `model.update()` -> added missing setup `self._attributes`. 

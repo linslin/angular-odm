@@ -259,7 +259,7 @@
                     var self = this;
 
                     //validate & check if PK to update is given
-                    if (this.validate() && angular.isNumber(this.ID)) {
+                    if (this.validate() && angular.isNumber(this.ID) && !angular.isUndefined(attributes)) {
 
                         // define sql statement
                         var data = {};
