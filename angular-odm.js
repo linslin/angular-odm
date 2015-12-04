@@ -180,6 +180,10 @@
                                 mergedSelf[attribute.name] = '';
                                 break;
 
+                            case 'boolean':
+                                mergedSelf[attribute.name] = null;
+                                break;
+
                             default:
                                 console.log('Not defined attributes type: "' + attribute.type + '" in model.init');
                                 break;
@@ -222,6 +226,10 @@
                                     break;
 
                                 case 'text':
+                                    data[attribute.name] = self[attribute.name];
+                                    break;
+
+                                case 'boolean':
                                     data[attribute.name] = self[attribute.name];
                                     break;
 
@@ -284,6 +292,10 @@
 
                                 case 'text':
                                     data[attribute.name] = String(attributes[attribute.name]);
+                                    break;
+
+                                case 'boolean':
+                                    data[attribute.name] = Boolean(attributes[attribute.name]);
                                     break;
                             }
                         });
@@ -388,6 +400,10 @@
                             case 'text':
                                 data[attribute.name] = String(attributes[attribute.name]);
                                 break;
+
+                            case 'boolean':
+                                data[attribute.name] = Boolean(attributes[attribute.name]);
+                                break;
                         }
                     });
 
@@ -425,6 +441,10 @@
 
                             case 'text':
                                 data[attribute.name] = String(attributes[attribute.name]);
+                                break;
+
+                            case 'boolean':
+                                data[attribute.name] = Boolean(attributes[attribute.name]);
                                 break;
                         }
                     });
@@ -474,6 +494,10 @@
 
                             case 'text':
                                 data[attribute.name] = String(attributes[attribute.name]);
+                                break;
+
+                            case 'boolean':
+                                data[attribute.name] = Boolean(attributes[attribute.name]);
                                 break;
                         }
                     });
@@ -567,6 +591,10 @@
                             case 'text':
                                 data[attribute.name] = String(attributes[attribute.name]);
                                 break;
+
+                            case 'boolean':
+                                data[attribute.name] = Boolean(attributes[attribute.name]);
+                                break;
                         }
                     });
 
@@ -622,6 +650,12 @@
                                     case 'text':
                                         if (!angular.isString(self[attribute.name])) {
                                             self.errors[attribute.name] = 'String expected';
+                                        }
+                                        break;
+
+                                    case 'boolean':
+                                        if (typeof(self[attribute.name]) !== "boolean") {
+                                            self.errors[attribute.name] = 'Boolean expected';
                                         }
                                         break;
 

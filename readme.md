@@ -590,6 +590,9 @@ Is automatically called before a database transaction.
 
 ## Changelog
 
+#### Version 0.0.6
+- Added model attribute datatype `boolean`.
+
 #### Version 0.0.5
 - Final fix: `model.update()` -> added missing setup `self._attributes`. 
 
